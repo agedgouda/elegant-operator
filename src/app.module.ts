@@ -4,7 +4,7 @@ import { AppService } from './app.service';
 import { HellosignModule } from './hellosign/hellosign.module';
 import { MailHandlerModule } from './mail-handler/mail-handler.module';
 import { ConfigModule } from '@nestjs/config';
-import { HttpModule,HttpService } from '@nestjs/axios';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [

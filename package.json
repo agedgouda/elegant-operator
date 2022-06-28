@@ -30,7 +30,6 @@
     "@nestjs/core": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
     "class-validator": "^0.13.2",
-    "dotenv": "^8.6.0",
     "handlebars": "^4.7.7",
     "hellosign-sdk": "^2.1.0",
     "mailchimp-api-v3": "^1.15.0",
