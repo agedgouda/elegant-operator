@@ -2,7 +2,6 @@ import { Body, Controller, Post,Res,HttpStatus } from '@nestjs/common';
 import { HellosignService } from './hellosign.service';
 import { Response } from 'express';
 import { FormDataRequest } from 'nestjs-form-data';
-import { HelloSignEventDto } from './dto/helloSignEvent.dto';
 
 @Controller('hellosign')
 export class HellosignController {
@@ -17,7 +16,13 @@ export class HellosignController {
             res.status(HttpStatus.NOT_FOUND).send('Hello API Event Failed');
         } else {
             const helloSignEvent = JSON.parse(event);
-            const response = this.helloSignService.agreementSigned(helloSignEvent);
+            
+            //if(helloSignEvent.event.event_type === 'signature_request_all_signed') {
+                const emailAddress = 'agedgouda@gmail.com';
+                const recipient = 'Bob';
+                const response = this.helloSignService.agreementSigned(emailAddress,recipient);
+            //}
+            
             res.status(HttpStatus.OK).send('Hello API Event Received');
         } 
         

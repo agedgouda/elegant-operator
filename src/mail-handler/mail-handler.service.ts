@@ -1,12 +1,15 @@
 import {  Injectable } from '@nestjs/common';
 import Mailchimp = require('mailchimp-api-v3');
 import {  ConfigService } from '@nestjs/config';
-//import { MailService } from 'src/mail/mail.service';
+import { MailerService } from '@nestjs-modules/mailer';
 
 
 @Injectable()
 export class MailHandlerService {
-    constructor(private configService: ConfigService) {}
+    constructor(
+        private configService: ConfigService,
+        private mailerService: MailerService,
+    ) {}
     async agreementSigned(address,recipient): Promise<any> {
         
         const mailchimp = require('@mailchimp/mailchimp_marketing');
@@ -23,14 +26,27 @@ export class MailHandlerService {
                     status: "subscribed",
                 }
             );
-        /*
-        const mailchimpResponse = await mailchimp.automations.addWorkflowEmailSubscriber (
-            "76270ec05e",
-            address,
-            { email_address: address }
+        
+        const mailServiceResponse = await this.sendMail(address,
+            recipient,
+            'scheduleOnboardingMeeting',
+            'Welcome to Elegance.Rent, Let\'s finalize onboarding!'
         );
-        */
-        //https://us13.api.mailchimp.com/3.0/automations/76270ec05e/emails/455feb0f2d/queue
-        return addToMailChimp;
+        return mailServiceResponse;
     }
-}
+    private async sendMail(address,recipient,template,subject) {
+        const mailServiceResponse = await this.mailerService.sendMail({
+        to: recipient+' <'+address+'>',
+        subject: subject,
+        template: './'+template,
+        context: {
+          name: address,
+          recipient: recipient,
+          calendlyAddress: this.configService.get<string>('CALENDLY_URL')
+        },
+      })
+      
+      return mailServiceResponse;
+    }
+      
+} 
