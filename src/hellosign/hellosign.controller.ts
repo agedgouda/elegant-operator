@@ -17,12 +17,14 @@ export class HellosignController {
         } else {
             const helloSignEvent = JSON.parse(event);
             
-            if(helloSignEvent.event.event_type === 'signature_request_all_signed') {
-                console.log(helloSignEvent.signature_request.signatures.signatures[1].signer_email_address);
-                const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
-                const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
-                const response = this.helloSignService.agreementSigned(emailAddress,recipient);
-                return response;
+            if(helloSignEvent.event.event_type === 'signature_request_signed') {
+                if(helloSignEvent.signature_request.signatures[1].status === 'signed' ) {
+                    console.log(helloSignEvent.signature_request.signatures.signatures[1].signer_email_address);
+                    const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
+                    const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
+                    const response = this.helloSignService.agreementSigned(emailAddress,recipient);
+                    return response;
+                }
             }
             
             res.status(HttpStatus.OK).send('Hello API Event Received');
