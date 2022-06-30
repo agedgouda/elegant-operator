@@ -17,8 +17,10 @@ export class HellosignController {
         } else {
             const helloSignEvent = JSON.parse(event);
             
-            if(helloSignEvent.event.event_type === 'signature_request_signed') {
-                if(helloSignEvent.signature_request.signatures[1].status === 'signed' ) {
+            //check to see if everybody signed the docu
+            if(helloSignEvent.event.event_type === 'signature_request_all_signed') {
+                //double check to make sure the person sent the onboarding agreement, then send the update mailchimp and send the onboarding email.
+                if(helloSignEvent.signature_request.signatures[1].status === 'signed' ){
                     console.log(helloSignEvent.signature_request.signatures.signatures[1].signer_email_address);
                     const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
                     const recipient = helloSignEvent.signature_request.signatures[1].signer_name;

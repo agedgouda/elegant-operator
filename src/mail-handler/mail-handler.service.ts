@@ -12,6 +12,7 @@ export class MailHandlerService {
     ) {}
     async agreementSigned(address,recipient): Promise<any> {
         
+        //send the signer's name to mailchimp
         const mailchimp = require('@mailchimp/mailchimp_marketing');
         mailchimp.setConfig({
             apiKey: this.configService.get<string>('API_KEY'),
@@ -27,6 +28,7 @@ export class MailHandlerService {
                 }
             );
         
+        //email onboarding scheduling email
         const mailServiceResponse = await this.sendMail(address,
             recipient,
             'scheduleOnboardingMeeting',
