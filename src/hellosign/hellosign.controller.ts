@@ -16,15 +16,11 @@ export class HellosignController {
             res.status(HttpStatus.NOT_FOUND).send('Hello API Event Failed');
         } else {
             const helloSignEvent = JSON.parse(event);
-            if(helloSignEvent.event.event_type !== 'callback_test') {
-                console.log(helloSignEvent.signature_request.signatures);
-            } else {
-                console.log(helloSignEvent.event);
-            }
             
             if(helloSignEvent.event.event_type === 'signature_request_signed') {
-                const emailAddress = helloSignEvent.signature_request.signatures[0].signer_email_address; //'agedgouda@gmail.com';
-                const recipient = helloSignEvent.signature_request.signatures[0].signer_name//'Bob';
+                console.log(helloSignEvent.signature_request.signatures.signatures[1].signer_email_address);
+                const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
+                const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
                 const response = this.helloSignService.agreementSigned(emailAddress,recipient);
                 return response;
             }
