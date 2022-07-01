@@ -14,14 +14,14 @@ import {  ConfigService } from '@nestjs/config';
     MailerModule.forRootAsync({
       // imports: [ConfigModule], // import module if not enabled globally
       useFactory: async (config: ConfigService) => ({
-        // transport: config.get("MAIL_TRANSPORT"),
+        // transport: config.get("MAIL_TRANSPORT"),secure: false,
         // or
         transport: {
           host: config.get('MAIL_HOST'),
-          secure: false,
+          port: 587,
           auth: {
             user: config.get('MAIL_USER'),
-            pass: config.get('MAIL_PASSWORD'),
+            pass: config.get('SENDGRID_API_KEY'),
           },
         },
         defaults: {
