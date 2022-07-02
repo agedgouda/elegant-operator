@@ -23,8 +23,8 @@ export class HellosignController {
                 if(helloSignEvent.signature_request.signatures[1].status_code === 'signed' ){
                     console.log(helloSignEvent.signature_request.signatures[1].signer_email_address);
                     console.log(helloSignEvent.signature_request.signatures);
-                    //const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
-                    //const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
+                    const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
+                    const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
                     //const response = this.helloSignService.agreementSigned(emailAddress,recipient);
                     //return response;
                 }
