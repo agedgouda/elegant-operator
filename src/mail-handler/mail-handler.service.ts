@@ -19,8 +19,6 @@ export class MailHandlerService {
             server: this.configService.get<string>('SERVER'),
           });
 
-        
-        /*
         const addToMailChimp = await mailchimp.lists.setListMember(
             this.configService.get<string>('LIST_NUMBER'),
                 address,
@@ -29,7 +27,7 @@ export class MailHandlerService {
                     status: "subscribed",
                 }
             );
-        */
+        
         //email onboarding scheduling email
         const mailServiceResponse = await this.sendMail(address,
             recipient,
