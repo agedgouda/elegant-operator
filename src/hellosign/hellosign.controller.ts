@@ -25,8 +25,8 @@ export class HellosignController {
                     console.log(helloSignEvent.signature_request.signatures);
                     const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
                     const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
-                    //const response = this.helloSignService.agreementSigned(emailAddress,recipient);
-                    //return response;
+                    const response = this.helloSignService.agreementSigned(emailAddress,recipient);
+                    return response;
                 }
             }
             
