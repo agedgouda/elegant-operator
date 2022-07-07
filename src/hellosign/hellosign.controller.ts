@@ -15,6 +15,8 @@ export class HellosignController {
         if (!event.length) {
             res.status(HttpStatus.NOT_FOUND).send('Hello API Event Failed');
         } else {
+
+            res.status(HttpStatus.OK).send('Hello API Event Received');
             const helloSignEvent = JSON.parse(event);
             console.log(helloSignEvent.event);
             //check to see if everybody signed the docu
@@ -22,7 +24,6 @@ export class HellosignController {
                 //double check to make sure the person sent the onboarding agreement, then send the update mailchimp and send the onboarding email.
                 if(helloSignEvent.signature_request.signatures[1].status_code === 'signed' ){
                     console.log(helloSignEvent.signature_request.signatures[1].signer_email_address);
-                    console.log(helloSignEvent.signature_request.signatures);
                     const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
                     const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
                     const response = this.helloSignService.agreementSigned(emailAddress,recipient);
@@ -30,7 +31,6 @@ export class HellosignController {
                 }
             }
             
-            res.status(HttpStatus.OK).send('Hello API Event Received');
         } 
         
     }
