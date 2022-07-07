@@ -29,12 +29,12 @@ export class MailHandlerService {
             );
         
         //email onboarding scheduling email
-        const mailServiceResponse = await this.sendMail(address,
+        /*const mailServiceResponse = await this.sendMail(address,
             recipient,
             'scheduleOnboardingMeeting',
             'Welcome to Elegance.Rent, Let\'s finalize onboarding!'
-        );
-        return mailServiceResponse;
+        );*/
+        return addToMailChimp;
     }
     private async sendMail(address,recipient,template,subject) {
         const mailServiceResponse = await this.mailerService.sendMail({
