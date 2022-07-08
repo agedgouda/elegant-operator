@@ -5,6 +5,9 @@ import { HellosignModule } from './hellosign/hellosign.module';
 import { MailHandlerModule } from './mail-handler/mail-handler.module';
 import { ConfigModule } from '@nestjs/config';
 import { HttpModule } from '@nestjs/axios';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { ClientModule } from './client/client.module';
+import ormconfig from './ormconfig';
 
 @Module({
   imports: [
@@ -13,7 +16,9 @@ import { HttpModule } from '@nestjs/axios';
     ConfigModule.forRoot({
       isGlobal: true, // no need to import into other modules
     }),
-    HttpModule
+    HttpModule,
+    TypeOrmModule.forRoot(ormconfig),
+    ClientModule
   ],
   controllers: [AppController],
   providers: [AppService],

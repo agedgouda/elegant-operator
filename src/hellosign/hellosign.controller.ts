@@ -15,7 +15,6 @@ export class HellosignController {
         if (!event.length) {
             res.status(HttpStatus.NOT_FOUND).send('Hello API Event Failed');
         } else {
-
             res.status(HttpStatus.OK).send('Hello API Event Received');
             const helloSignEvent = JSON.parse(event);
             console.log(helloSignEvent.event);
