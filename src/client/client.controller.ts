@@ -10,6 +10,4 @@ export class ClientController {
         const client = await this.clientService.findClientByEmail(email)
         return client;
     }
-
-
 }
