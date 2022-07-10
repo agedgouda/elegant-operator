@@ -8,4 +8,7 @@ export class CreateClientDto {
     @IsNotEmpty()
     readonly status: string;
 
+    @IsNotEmpty()
+    readonly signature_id: string;
+
 }

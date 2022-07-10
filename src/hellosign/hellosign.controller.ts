@@ -22,10 +22,9 @@ export class HellosignController {
             if(helloSignEvent.event.event_type === 'signature_request_all_signed') {
                 //double check to make sure the person sent the onboarding agreement, then send the update mailchimp and send the onboarding email.
                 if(helloSignEvent.signature_request.signatures[1].status_code === 'signed' ){
-                    console.log(helloSignEvent.signature_request.signatures[1].signer_email_address);
-                    const emailAddress = helloSignEvent.signature_request.signatures[1].signer_email_address;
-                    const recipient = helloSignEvent.signature_request.signatures[1].signer_name;
-                    const response = this.helloSignService.agreementSigned(emailAddress,recipient);
+                    console.log(helloSignEvent.signature_request.signatures[1]);
+                    const signerInfo = helloSignEvent.signature_request.signatures[1];
+                    const response = this.helloSignService.agreementSigned(signerInfo);
                     return response;
                 }
             }

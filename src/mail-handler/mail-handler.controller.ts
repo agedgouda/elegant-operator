@@ -9,10 +9,10 @@ export class MailHandlerController {
 
     @Post('agreement_signed')
     agreementSigned(
-        @Body('signer') signedAgreementDto:SignedAgreementDto
+        @Body('signerInfo') signedAgreementDto:SignedAgreementDto
     ) {
         //return signedAgreementDto.emailAddress;
-        const status =  this.mailHandlerService.agreementSigned(signedAgreementDto.emailAddress,signedAgreementDto.emailRecipient);
+        const status =  this.mailHandlerService.agreementSigned(signedAgreementDto);
         //console.log(status)
         return status;
     } 

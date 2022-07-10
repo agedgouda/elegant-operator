@@ -10,7 +10,7 @@ export class MailHandlerService {
         private configService: ConfigService,
         private mailerService: MailerService,
     ) {}
-    async agreementSigned(address,recipient): Promise<any> {
+    async agreementSigned(signerInfo): Promise<any> {
         
         //send the signer's name and email address to mailchimp
         const mailchimp = require('@mailchimp/mailchimp_marketing');
@@ -21,19 +21,19 @@ export class MailHandlerService {
 
         const addToMailChimp = await mailchimp.lists.setListMember(
             this.configService.get<string>('LIST_NUMBER'),
-                address,
+                signerInfo.signer_email_address,
                 {
-                    email_address: address,
+                    email_address: signerInfo.signer_email_address,
                     status: "subscribed",
                 }
             );
         
         //email onboarding scheduling email
-        /*const mailServiceResponse = await this.sendMail(address,
-            recipient,
+        const mailServiceResponse = await this.sendMail(signerInfo.signer_email_address,
+            signerInfo.signer_name,
             'scheduleOnboardingMeeting',
             'Welcome to Elegance.Rent, Let\'s finalize onboarding!'
-        );*/
+        );
         return addToMailChimp;
     }
     private async sendMail(address,recipient,template,subject) {

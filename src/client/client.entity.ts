@@ -10,6 +10,9 @@ export class ClientEntity {
     
     @Column()
     status: string;
+    
+    @Column()
+    signature_id: string;
 
     @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP'})
     createdAt: Date;

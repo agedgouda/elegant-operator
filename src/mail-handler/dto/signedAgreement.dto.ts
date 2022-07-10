@@ -6,6 +6,9 @@ export class SignedAgreementDto {
     
     @IsNotEmpty()
     readonly emailRecipient: string;
+    
+    @IsNotEmpty()
+    readonly signature_id: string;
 
 
 }
