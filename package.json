@@ -21,7 +21,7 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/ormconfig.ts",
     "db:drop": "npm run typeorm schema:drop",
-    "db:create": "npm run typeorm migration:generate -- -n",
+    "db:create": "npm run typeorm migration:generate -d src/migrations -- -n",
     "db:migrate": "npm run typeorm migration:run",
     "db:seed": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js --config src/ormseedconfig.ts migration:run"
   },
@@ -47,6 +47,7 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^7.2.0",
+    "typeorm": "^0.3.7",
     "webpack": "^5.73.0"
   },
   "devDependencies": {

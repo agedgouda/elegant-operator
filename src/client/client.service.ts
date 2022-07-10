@@ -12,10 +12,10 @@ export class ClientService {
     ) {}
 
     async findClientByEmail(email: string): Promise<ClientEntity> {
-        return this.clientEntity.findOne({email});
+        return this.clientEntity.findOneBy({email});
     }
     async findClientBySignatureID(signature_id: string): Promise<ClientEntity> {
-        return this.clientEntity.findOne({signature_id});
+        return this.clientEntity.findOneBy({signature_id});
     }
 
     async addClient(clientEmail:string,status: string,signatureID: string): Promise<ClientEntity> {
