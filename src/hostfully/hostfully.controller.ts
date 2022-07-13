@@ -11,6 +11,6 @@ export class HostfullyController {
     }
     @Post('hostfully_update')
     hostfullyPropertyUpdate() {
-        return this.hostfullyService.hostfullyPropertyUpdate('bob');
+        return this.hostfullyService.hostfullyPropertyUpdate('TEST');
     }
 }
