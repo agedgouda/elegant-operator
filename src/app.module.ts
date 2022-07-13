@@ -20,7 +20,6 @@ import { HostfullyModule } from './hostfully/hostfully.module';
       isGlobal: true, // no need to import into other modules
     }),
     HttpModule,
-    TypeOrmModule.forRoot(config),
   ],
   controllers: [AppController, PropertyController],
   providers: [AppService],
