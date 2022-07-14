@@ -11,7 +11,12 @@ export class HostfullyController {
     }
 
     @Post('hostfully_update')
-    hostfullyPropertyUpdate(@Body() response) {
+    async hostfullyPropertyUpdate(@Body() response): Promise<any> {
         return this.hostfullyService.hostfullyPropertyUpdate(response.property_uid);
+    }
+    @Post('hostfully_update_local')
+    async hostfullyPropertyUpdateLocal() {
+        return this.hostfullyService.hostfullyPropertyUpdate('6cc1759e-81e5-400b-860c-41b6ba705c49');
+        
     }
 }
