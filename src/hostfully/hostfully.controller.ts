@@ -9,8 +9,9 @@ export class HostfullyController {
     test() {
         return 'eynow'
     }
+
     @Post('hostfully_update')
-    hostfullyPropertyUpdate() {
-        return this.hostfullyService.hostfullyPropertyUpdate('TEST');
+    hostfullyPropertyUpdate(@Body() response) {
+        return this.hostfullyService.hostfullyPropertyUpdate(response.property_uid);
     }
 }
