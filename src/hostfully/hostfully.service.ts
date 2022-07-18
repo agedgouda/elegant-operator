@@ -47,37 +47,7 @@ export class HostfullyService {
         console.log(hostfullyData) ;
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const oldRecord = await index.search(hostfullyProperty.uid, {
-            responseFields: [
-                "name",
-                "tier",
-                "hostname",
-                "phone",
-                "email",
-                "active",
-                "type",
-                "bedroom",
-                "bath",
-                "pets",
-                "exterminator",
-                "insurance",
-                "address",
-                "city",
-                "state",
-                "zip",
-                "wifi_ssid",
-                "wifi_password",
-                "notes",
-                "hostfully",
-                "operto",
-                "image",
-                "beds",
-                "video",
-                "reviews",
-                "maintenance",
-                "public_name",
-                "consumables",
-                "objectID"
-            ]
+            responseFields: ['*']
           });
         //const algoliaUpdate = await index.saveObject(hostfullyData);
         
