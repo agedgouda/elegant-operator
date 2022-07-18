@@ -7,6 +7,7 @@ export class AppController {
 
   @Get()
   getHello(): string {
+    console.log(process.env.ALGOLIA_APPLICATION_ID)
     return this.appService.getHello();
   }
 }
