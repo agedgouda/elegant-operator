@@ -7,7 +7,8 @@ export class HostfullyController {
 
     @Post('hostfully_update')
     async hostfullyPropertyUpdate(@Body() response): Promise<any> {
-    const hostfullyData = await this.hostfullyService.hostfullyPropertyUpdate('57948400-a4b6-4800-b8e7-6a5114a0e225');
+    console.log(response);
+        //const hostfullyData = await this.hostfullyService.hostfullyPropertyUpdate('57948400-a4b6-4800-b8e7-6a5114a0e225');
     //const hostfullyData = await this.hostfullyService.hostfullyPropertyUpdate(response.property_uid);
     }
     @Get('hostfully_test_algolia')
