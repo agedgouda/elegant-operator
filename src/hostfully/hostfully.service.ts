@@ -49,7 +49,7 @@ export class HostfullyService {
         const oldRecord = await index.search(hostfullyProperty.uid, {
             facets: ['*']
           });
-        //const algoliaUpdate = await index.saveObject(hostfullyData);
+        const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
         console.log(oldRecord);
         return oldRecord;
