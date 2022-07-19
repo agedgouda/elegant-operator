@@ -48,7 +48,7 @@ export class HostfullyService {
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const oldRecord = await index.getObject(hostfullyProperty.uid);
         
-          //const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
+        //const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
           console.log(oldRecord);
           console.log(hostfullyData);
