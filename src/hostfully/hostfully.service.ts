@@ -46,9 +46,7 @@ export class HostfullyService {
         }
         console.log(hostfullyData) ;
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
-        const oldRecord = await index.search(hostfullyProperty.uid, {
-            facets: ['*']
-          });
+        const oldRecord = await index.getObject(hostfullyProperty.uid);
         
           //const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
