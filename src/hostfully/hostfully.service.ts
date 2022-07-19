@@ -39,7 +39,7 @@ export class HostfullyService {
     }
 
 
-    async getHostfullyProperty(hostfullyID) {
+    private async getHostfullyProperty(hostfullyID) {
         
         const hostfullyProperty = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"properties/"+hostfullyID) ;
         const hostfullyPropertyOwnership = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertyownership/"+hostfullyID) ;
@@ -82,7 +82,6 @@ export class HostfullyService {
     }
 
     private async getHostfullyData(url) {
-        console.log(url)
         return await lastValueFrom(this.httpService.get(
             url,
             { 'headers': {
