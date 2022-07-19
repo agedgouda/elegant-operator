@@ -44,14 +44,14 @@ export class HostfullyService {
             reviews: hostfullyProperty.reviews.total,
             objectID: hostfullyProperty.uid 
         }
-        console.log(hostfullyData) ;
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const oldRecord = await index.getObject(hostfullyProperty.uid);
+        const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
-        const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true}); //, {createIfNotExists: true}
+        console.log(hostfullyData);
+        console.log(oldRecord);
+        console.log(algoliaUpdate);
         
-          console.log(oldRecord);
-          console.log(hostfullyData);
         return algoliaUpdate;
     }
 
