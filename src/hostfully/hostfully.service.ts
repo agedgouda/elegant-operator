@@ -48,11 +48,15 @@ export class HostfullyService {
         const oldRecord = await index.getObject(hostfullyProperty.uid);
         const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
-        console.log(hostfullyData);
-        console.log(oldRecord);
-        console.log(algoliaUpdate);
+        const updateLog = {
+            "hostfullyData":hostfullyData,
+            "oldRecord":oldRecord,
+            "algoliaUpdate":algoliaUpdate,
+        }
+
+        console.log(updateLog);
         
-        return algoliaUpdate;
+        return updateLog;
     }
 
     private async algoliaTest(hostfullyProperty) {
