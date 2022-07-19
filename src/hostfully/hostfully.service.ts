@@ -15,18 +15,51 @@ export class HostfullyService {
 
     async hostfullyPropertyUpdate(hostfullyID) {
         
-        const hostfullyProperty = await lastValueFrom(this.httpService.get(
-            this.configService.get<string>('HOSTFULL_API_URL')+hostfullyID,
-            { 'headers': {
-                    'Accept':'application/json',
-                    'X-HOSTFULLY-APIKEY':this.configService.get<string>('HOSTFULLY_APIKEY'),
-                }
-            }
-        ).pipe(
-            map(response => response.data)
-        ));
+        const hostfullyData = await this.getHostfullyProperty(hostfullyID);
+        const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
+        const oldRecord = await index.getObject(hostfullyID);
+        const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
+        
+        const updateLog = {
+            "hostfullyData":hostfullyData,
+            "oldRecord":oldRecord,
+            "algoliaUpdate":algoliaUpdate,
+        }
+
+        console.log(updateLog);
+        
+        return updateLog;
+    }
+
+    async algoliaTest() {
+        const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
+        const ollie = await index.search('',{hitsPerPage: 71}) 
+        console.log(ollie)
+        return ollie;
+    }
+
+
+    async getHostfullyProperty(hostfullyID) {
+        
+        const hostfullyProperty = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"properties/"+hostfullyID) ;
+        const hostfullyPropertyOwnership = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertyownership/"+hostfullyID) ;
+        const hostfullyPropertyOwner = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"owners/"+hostfullyPropertyOwnership.ownerUid) ;
+        const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
+        const hostfullyPropertyDescription = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertydescriptions?propertyUid="+hostfullyID) ;
+
         const hostfullyData = {
             name: hostfullyProperty.name,
+            public_name:hostfullyPropertyDescription[0].name,
+            notes:hostfullyPropertyDescription[0].notes,
+            tier:"Premium",
+            exterminator: "false",
+            insurance: "false",
+            maintenance: "Rob Kennison",
+            consumables: "false",
+            email: hostfullyPropertyOwner.email,
+            phone:hostfullyPropertyOwner.phoneNumber,
+            hostname: hostfullyPropertyOwner.firstName+" "+hostfullyPropertyOwner.lastName,
+            pets:hostfullyPropertyAmmenities.allowsPets,
             active: hostfullyProperty.isActive,
             type: hostfullyProperty.type,
             bedroom: hostfullyProperty.bedrooms,
@@ -44,27 +77,23 @@ export class HostfullyService {
             reviews: hostfullyProperty.reviews.total,
             objectID: hostfullyProperty.uid 
         }
-        const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
-        const oldRecord = await index.getObject(hostfullyProperty.uid);
-        const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
-        
-        const updateLog = {
-            "hostfullyData":hostfullyData,
-            "oldRecord":oldRecord,
-            "algoliaUpdate":algoliaUpdate,
+
+        return(hostfullyData);
+    }
+
+    private async getHostfullyData(url) {
+        console.log(url)
+        return await lastValueFrom(this.httpService.get(
+            url,
+            { 'headers': {
+                    'Accept':'application/json',
+                    'X-HOSTFULLY-APIKEY':this.configService.get<string>('HOSTFULLY_APIKEY'),
+                }
+            }
+        ).pipe(
+            map(response => response.data)
+        ));
         }
-
-        console.log(updateLog);
-        
-        return updateLog;
-    }
-
-    private async algoliaTest(hostfullyProperty) {
-        const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
-        const ollie = await index.search(hostfullyProperty.uid)
-        console.log(ollie)
-        return ollie;
-    }
 
 
 }
