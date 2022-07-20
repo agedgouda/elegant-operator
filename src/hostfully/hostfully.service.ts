@@ -52,10 +52,13 @@ export class HostfullyService {
             public_name:hostfullyPropertyDescription[0].name,
             notes:hostfullyPropertyDescription[0].notes,
             tier:"Premium",
+            lawn:"false",
             exterminator: "false",
             insurance: "false",
             maintenance: "Rob Kennison",
             consumables: "false",
+            video: "",
+            oporto: 0,
             email: hostfullyPropertyOwner.email,
             phone:hostfullyPropertyOwner.phoneNumber,
             hostname: hostfullyPropertyOwner.firstName+" "+hostfullyPropertyOwner.lastName,
@@ -68,18 +71,23 @@ export class HostfullyService {
             city: hostfullyProperty.city,
             state: hostfullyProperty.state,
             zip: hostfullyProperty.postalCode,
+            wifi_ssid: hostfullyProperty.wifiNetwork,
             wifi_password: hostfullyProperty.wifiPassword,
             hostfully: hostfullyProperty.webLink,
             airbnb: hostfullyProperty.listingLinks.airbnbUrl,
             vrbo: hostfullyProperty.listingLinks.homeAwayUrl,
+            bookingCom: hostfullyProperty.listingLinks.bookingDotComUrl,
             image: hostfullyProperty.picture,
             beds: hostfullyProperty.bedCount,
             reviews: hostfullyProperty.reviews.total,
+            //rating
             objectID: hostfullyProperty.uid 
         }
 
         return(hostfullyData);
     }
+//delete from hostfully
+
 
     private async getHostfullyData(url) {
         return await lastValueFrom(this.httpService.get(
