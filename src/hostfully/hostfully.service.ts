@@ -46,10 +46,12 @@ export class HostfullyService {
         const hostfullyProperty = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"properties/"+hostfullyID) ;
         console.log(hostfullyProperty);
         const hostfullyPropertyOwnership = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertyownership/"+hostfullyID) ;
-        const hostfullyPropertyOwner = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"owners/"+hostfullyPropertyOwnership.ownerUid) ;
-        console.log(hostfullyPropertyOwner);
-        const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
-        console.log(hostfullyPropertyAmmenities);
+        console.log(hostfullyPropertyOwnership);
+        
+        //const hostfullyPropertyOwner = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"owners/"+hostfullyPropertyOwnership.ownerUid) ;
+        //console.log(hostfullyPropertyOwner);
+        //const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
+        //console.log(hostfullyPropertyAmmenities);
         
         /*const hostfullyPropertyDescription = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertydescriptions?propertyUid="+hostfullyID) ;
 
