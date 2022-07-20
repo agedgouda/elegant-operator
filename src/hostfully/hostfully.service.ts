@@ -18,7 +18,7 @@ export class HostfullyService {
         const hostfullyData = await this.getHostfullyProperty(hostfullyID);
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const oldRecord = await index.getObject(hostfullyID);
-        /*const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
+        const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
         const updateLog = {
             "hostfullyData":hostfullyData,
@@ -29,9 +29,6 @@ export class HostfullyService {
         console.log(updateLog);
         
         return updateLog;
-        */
-       console.log(hostfullyData);
-       return "testing";
     }
 
     async algoliaTest() {
@@ -50,10 +47,11 @@ export class HostfullyService {
         
         const hostfullyPropertyOwner = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"owners/"+hostfullyPropertyOwnership.ownerUid) ;
         console.log(hostfullyPropertyOwner);
-        //const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
-        //console.log(hostfullyPropertyAmmenities);
         
-        /*const hostfullyPropertyDescription = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertydescriptions?propertyUid="+hostfullyID) ;
+        const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
+        console.log(hostfullyPropertyAmmenities);
+        
+        const hostfullyPropertyDescription = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertydescriptions?propertyUid="+hostfullyID) ;
 
         const hostfullyData = {
             name: hostfullyProperty.name,
@@ -93,8 +91,6 @@ export class HostfullyService {
         }
 
         return(hostfullyData);
-        */
-       return 'testing';
     }
 //delete from hostfully
 
