@@ -44,6 +44,8 @@ export class HostfullyService {
 
     private async getHostfullyProperty(hostfullyID) {
         const hostfullyProperty = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"properties/"+hostfullyID) ;
+        console.log(hostfullyProperty);
+        /*
         const hostfullyPropertyOwnership = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertyownership/"+hostfullyID) ;
         const hostfullyPropertyOwner = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"owners/"+hostfullyPropertyOwnership.ownerUid) ;
         const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
@@ -87,6 +89,8 @@ export class HostfullyService {
         }
 
         return(hostfullyData);
+        */
+       return 'testing';
     }
 //delete from hostfully
 
