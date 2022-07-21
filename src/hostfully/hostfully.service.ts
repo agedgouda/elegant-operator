@@ -86,7 +86,7 @@ export class HostfullyService {
             image: hostfullyProperty.picture,
             beds: hostfullyProperty.bedCount,
             reviews: hostfullyProperty.reviews.total,
-            rating: hostfullyProperty.reviews.average,
+            rating: hostfullyProperty.reviews.average.toFixed(2),
             hostfully_id: hostfullyProperty.uid,
             objectID: hostfullyProperty.uid 
         }
