@@ -31,6 +31,9 @@ export class HostfullyService {
         return updateLog;
     }
 
+    async deleteHostfullyProperty(hostfullyID) {
+
+    }
     async algoliaTest() {
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const ollie = await index.search('',{hitsPerPage: 71}) 
@@ -57,7 +60,6 @@ export class HostfullyService {
             name: hostfullyProperty.name,
             public_name:hostfullyPropertyDescription[0].name,
             notes:hostfullyPropertyDescription[0].notes,
-            tier:"Premium",
             lawn:"false",
             exterminator: "false",
             insurance: "false",
@@ -93,7 +95,7 @@ export class HostfullyService {
 
         return(hostfullyData);
     }
-//delete from hostfully
+
 
 
     private async getHostfullyData(url) {
