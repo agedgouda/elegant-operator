@@ -87,6 +87,7 @@ export class HostfullyService {
             beds: hostfullyProperty.bedCount,
             reviews: hostfullyProperty.reviews.total,
             rating: hostfullyProperty.reviews.average,
+            hostfully_id: hostfullyProperty.uid,
             objectID: hostfullyProperty.uid 
         }
 
