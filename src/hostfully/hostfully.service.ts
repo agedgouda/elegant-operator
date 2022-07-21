@@ -66,7 +66,7 @@ export class HostfullyService {
             video: "",
             oporto: 0,
             email: hostfullyPropertyOwner.email,
-            phone:hostfullyPropertyOwner.phoneNumber,
+            phone: this.formatPhoneNumber(hostfullyPropertyOwner.phoneNumber),
             hostname: hostfullyPropertyOwner.firstName+" "+hostfullyPropertyOwner.lastName,
             pets:hostfullyPropertyAmmenities.allowsPets,
             active: hostfullyProperty.isActive,
@@ -107,7 +107,16 @@ export class HostfullyService {
         ).pipe(
             map(response => response.data)
         ));
+    }
+
+    private formatPhoneNumber(phoneNumberString) {
+        var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+        var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+        if (match) {
+          return match[1] + '-' + match[2] + '-' + match[3];
         }
+        return null;
+      }
 
 
 }
