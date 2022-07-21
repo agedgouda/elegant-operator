@@ -32,8 +32,13 @@ export class HostfullyService {
     }
 
     async deleteHostfullyProperty(hostfullyID) {
+        const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
+        const algoliaDelete = await index.deleteObject(hostfullyID);
+        console.log(algoliaDelete);
+        return algoliaDelete;
 
     }
+
     async algoliaTest() {
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const ollie = await index.search('',{hitsPerPage: 71}) 

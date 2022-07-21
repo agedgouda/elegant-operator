@@ -7,13 +7,13 @@ export class HostfullyController {
 
     @Post('hostfully_update')
     async hostfullyPropertyUpdate(@Body() response): Promise<any> {
-        console.log(response);
+        console.log('update ',response);
         const hostfullyData = await this.hostfullyService.hostfullyPropertyUpdate(response.property_uid);
     }
     
     @Post('hostfully_delete')
     async hostfullyPropertyDelete(@Body() response): Promise<any> {
-        console.log(response);
+        console.log('delete ',response);
         const hostfullyData = await this.hostfullyService.deleteHostfullyProperty(response.property_uid);
     }
 
