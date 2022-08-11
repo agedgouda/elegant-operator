@@ -36,6 +36,26 @@ export class MailHandlerService {
         );
         return addToMailChimp;
     }
+    async testMail(address,recipient,template,subject) {
+        const mailServiceResponse = await this.mailerService.sendMail({
+        to: recipient+' <'+address+'>',
+        bcc: 'Jeff Kaufman <jeff@elegance.rent>',
+        subject: subject,
+        template: './'+template,
+        attachments:[{
+            path: __dirname +'/assets/Elegance Co-Host Handbook.pdf',
+            filename: 'Elegance Co-Host Handbook.pdf',
+            contentDisposition:"attachment"
+        }],
+        context: {
+          name: address,
+          recipient: recipient,
+          calendlyAddress: this.configService.get<string>('CALENDLY_URL')
+        },
+      })
+      
+      return mailServiceResponse;
+    }
     private async sendMail(address,recipient,template,subject) {
         const mailServiceResponse = await this.mailerService.sendMail({
         to: recipient+' <'+address+'>',

@@ -11,10 +11,21 @@ export class MailHandlerController {
     agreementSigned(
         @Body('signerInfo') signedAgreementDto:SignedAgreementDto
     ) {
-        //return signedAgreementDto.emailAddress;
         const status =  this.mailHandlerService.agreementSigned(signedAgreementDto);
-        //console.log(status)
         return status;
     } 
+
+    @Post('test_message')
+    testMessage(
+        @Body('signerInfo') signedAgreementDto:SignedAgreementDto
+    ):any {
+        
+        const tester =  this.mailHandlerService.testMail(signedAgreementDto.emailAddress,
+            signedAgreementDto.emailRecipient,
+            'scheduleOnboardingMeeting',
+            'Welcome to Elegance.Rent, Let\'s finalize onboarding!');
+        
+        return tester;
+    }  
 
 }
