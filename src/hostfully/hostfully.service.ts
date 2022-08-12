@@ -71,6 +71,8 @@ export class HostfullyService {
         
         const hostfullyPropertyDescription = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertydescriptions?propertyUid="+hostfullyID) ;
 
+        const avgRating = hostfullyProperty.reviews.average ?  hostfullyProperty.reviews.average.toFixed(2) : 0.00;
+
         const hostfullyData = {
             name: hostfullyProperty.name,
             public_name:hostfullyPropertyDescription[0].name,
@@ -103,7 +105,7 @@ export class HostfullyService {
             image: hostfullyProperty.picture,
             beds: hostfullyProperty.bedCount,
             reviews: hostfullyProperty.reviews.total,
-            rating: hostfullyProperty.reviews.average.toFixed(2),
+            rating: avgRating,
             hostfully_id: hostfullyProperty.uid,
             objectID: hostfullyProperty.uid 
         }
