@@ -108,10 +108,9 @@ export class HostfullyService {
             objectID: hostfullyProperty.uid 
         }
 
-        const hostfullyCustomData = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"customdata?propertyUid=59294ad7-3696-4976-8c2d-39a1bdedf8cc") ;
+        const hostfullyCustomData = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"customdata?propertyUid="+hostfullyID) ;
         if (hostfullyCustomData) {
             const tier = hostfullyCustomData.find(item => item.customDataField.name=== "Tier")
-            console.log(tier.text);
             if (tier.text) {
                 hostfullyData['tier'] =  tier.text;
             }
