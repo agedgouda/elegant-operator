@@ -111,7 +111,7 @@ export class HostfullyService {
         const hostfullyCustomData = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"customdata?propertyUid="+hostfullyID) ;
         if (hostfullyCustomData) {
             const tier = hostfullyCustomData.find(item => item.customDataField.name=== "Tier")
-            if (tier.text) {
+            if (tier) {
                 hostfullyData['tier'] =  tier.text;
             }
         }
