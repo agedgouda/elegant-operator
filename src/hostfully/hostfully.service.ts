@@ -17,12 +17,10 @@ export class HostfullyService {
         
         const hostfullyData = await this.getHostfullyProperty(hostfullyID);
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
-        //const oldRecord = await index.getObject(hostfullyID);
         const algoliaUpdate = await index.partialUpdateObject(hostfullyData, {createIfNotExists: true});
         
         const updateLog = {
             "hostfullyData":hostfullyData,
-            //"oldRecord":oldRecord,
             "algoliaUpdate":algoliaUpdate,
         }
 
@@ -53,7 +51,7 @@ export class HostfullyService {
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const ollie = await index.search('',{hitsPerPage: 71}) 
         console.log(ollie)
-        return ollie;
+        return index;
     }
 
 
@@ -108,6 +106,15 @@ export class HostfullyService {
             rating: avgRating,
             hostfully_id: hostfullyProperty.uid,
             objectID: hostfullyProperty.uid 
+        }
+
+        const hostfullyCustomData = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"customdata?propertyUid=59294ad7-3696-4976-8c2d-39a1bdedf8cc") ;
+        if (hostfullyCustomData) {
+            const tier = hostfullyCustomData.find(item => item.customDataField.name=== "Tier")
+            console.log(tier.text);
+            if (tier.text) {
+                hostfullyData['tier'] =  tier.text;
+            }
         }
 
         return(hostfullyData);
