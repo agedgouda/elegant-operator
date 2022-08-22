@@ -112,11 +112,14 @@ export class HostfullyService {
             const tier = hostfullyCustomData.find(item => item.customDataField.name=== "Tier")
             if (tier) {
                 hostfullyData['tier'] =  tier.text;
+            } else {
+                hostfullyData['tier'] =   "Premium";
             }
             const maintenance = hostfullyCustomData.find(item => item.customDataField.name=== "Maintenence")
             if (maintenance) {
-                hostfullyData['tier'] =  tier.maintenance;
+                hostfullyData['maintenance'] =  tier.maintenance;
             } else {
+                console.log(hostfullyCustomData);
                 hostfullyData['maintenance'] =   "Rob Kennison";
             }
         }
