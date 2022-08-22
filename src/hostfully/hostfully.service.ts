@@ -127,6 +127,7 @@ export class HostfullyService {
             }
             const consumables = hostfullyCustomData.find(item => item.customDataField.name === "Consumables")
             if (consumables && consumables !== '' ) {
+                console.log(hostfullyData);
                 hostfullyData['consumables'] =  consumables.text;
             } else {
                 hostfullyData['consumables'] =   "false";
