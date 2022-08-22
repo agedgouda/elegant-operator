@@ -75,10 +75,8 @@ export class HostfullyService {
             name: hostfullyProperty.name,
             public_name:hostfullyPropertyDescription[0].name,
             notes:hostfullyPropertyDescription[0].notes,
-            lawn:"false",
             exterminator: "false",
             insurance: "false",
-            consumables: "false",
             video: "",
             oporto: 0,
             email: hostfullyPropertyOwner.email,
@@ -119,8 +117,19 @@ export class HostfullyService {
             if (maintenance) {
                 hostfullyData['maintenance'] =  maintenance.text;
             } else {
-                console.log(hostfullyCustomData);
                 hostfullyData['maintenance'] =   "Rob Kennison";
+            }
+            const lawn = hostfullyCustomData.find(item => item.customDataField.name === "Lawn")
+            if (lawn) {
+                hostfullyData['lawn'] =  lawn.text;
+            } else {
+                hostfullyData['lawn'] =   "false";
+            }
+            const consumables = hostfullyCustomData.find(item => item.customDataField.name === "Consumables")
+            if (consumables) {
+                hostfullyData['consumables'] =  consumables.text;
+            } else {
+                hostfullyData['consumables'] =   "false";
             }
         }
 
