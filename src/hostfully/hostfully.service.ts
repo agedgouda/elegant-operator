@@ -78,7 +78,6 @@ export class HostfullyService {
             lawn:"false",
             exterminator: "false",
             insurance: "false",
-            maintenance: "Rob Kennison",
             consumables: "false",
             video: "",
             oporto: 0,
@@ -113,6 +112,12 @@ export class HostfullyService {
             const tier = hostfullyCustomData.find(item => item.customDataField.name=== "Tier")
             if (tier) {
                 hostfullyData['tier'] =  tier.text;
+            }
+            const maintenance = hostfullyCustomData.find(item => item.customDataField.name=== "Maintenence")
+            if (maintenance) {
+                hostfullyData['tier'] =  tier.maintenance;
+            } else {
+                hostfullyData['maintenance'] =   "Rob Kennison";
             }
         }
 
