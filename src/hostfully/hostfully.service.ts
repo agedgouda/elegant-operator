@@ -109,15 +109,15 @@ export class HostfullyService {
 
         const hostfullyCustomData = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"customdata?propertyUid="+hostfullyID) ;
         if (hostfullyCustomData) {
-            const tier = hostfullyCustomData.find(item => item.customDataField.name=== "Tier")
+            const tier = hostfullyCustomData.find(item => item.customDataField.name === "Tier")
             if (tier) {
                 hostfullyData['tier'] =  tier.text;
             } else {
                 hostfullyData['tier'] =   "Premium";
             }
-            const maintenance = hostfullyCustomData.find(item => item.customDataField.name=== "Maintenence")
+            const maintenance = hostfullyCustomData.find(item => item.customDataField.name === "Maintenance")
             if (maintenance) {
-                hostfullyData['maintenance'] =  tier.maintenance;
+                hostfullyData['maintenance'] =  tier.text;
             } else {
                 console.log(hostfullyCustomData);
                 hostfullyData['maintenance'] =   "Rob Kennison";
