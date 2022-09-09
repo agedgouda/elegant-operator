@@ -22,4 +22,10 @@ export class HostfullyController {
         return this.hostfullyService.algoliaTest();
         
     }
+
+    @Get('all_properties')
+    async getAllProperties() {
+        return this.hostfullyService.getAllProperties();
+        
+    }
 }

@@ -29,6 +29,22 @@ export class HostfullyService {
         return updateLog;
     }
 
+    async getAllProperties() {
+        
+        const hostfullyProperties = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"properties?agencyUid=a47ce045-02eb-42fb-87f4-100a6be94f49&limit=50") 
+        
+        hostfullyProperties.propertiesUids.forEach(hostfullyID => {
+            const hostfullyProperty = this.getHostfullyProperty(hostfullyID).then(
+                (property) => {
+                    const public_name = property.public_name;
+                    console.log(property.objectID,',',property.public_name)
+                }
+            );
+
+        });
+        return hostfullyProperties;
+    }
+
     async deleteHostfullyProperty(hostfullyID) {
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
         const algoliaDelete = await index.deleteObject(hostfullyID);
@@ -39,11 +55,10 @@ export class HostfullyService {
 
     async addHostfullyProperty(hostfullyID) {
         const hostfullyData = await this.getHostfullyProperty(hostfullyID);
-        hostfullyData['tier'] = "Premium";
         const index = await this.algoliaService.initIndex(this.configService.get<string>('ALGOLIA_INDEX'));
-        const algoliaDelete = await index.saveObject(hostfullyData);
-        console.log(algoliaDelete);
-        return algoliaDelete;
+        const algoliaSave = await index.saveObject(hostfullyData);
+        console.log(algoliaSave);
+        return algoliaSave;
 
     }
 
@@ -57,18 +72,10 @@ export class HostfullyService {
 
     private async getHostfullyProperty(hostfullyID) {
         const hostfullyProperty = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"properties/"+hostfullyID) ;
-        console.log(hostfullyProperty);
         const hostfullyPropertyOwnership = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertyownership/"+hostfullyID) ;
-        console.log(hostfullyPropertyOwnership);
-        
         const hostfullyPropertyOwner = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"owners/"+hostfullyPropertyOwnership.ownerUid) ;
-        console.log(hostfullyPropertyOwner);
-        
         const hostfullyPropertyAmmenities = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"amenities/"+hostfullyID) ;
-        console.log(hostfullyPropertyAmmenities);
-        
         const hostfullyPropertyDescription = await this.getHostfullyData(this.configService.get<string>('HOSTFULL_API_URL')+"propertydescriptions?propertyUid="+hostfullyID) ;
-
         const avgRating = hostfullyProperty.reviews.average ?  hostfullyProperty.reviews.average.toFixed(2) : 0.00;
 
         const hostfullyData = {
